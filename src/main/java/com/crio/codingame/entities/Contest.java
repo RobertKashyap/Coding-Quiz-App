@@ -30,9 +30,26 @@ public class Contest extends BaseEntity{
     //  Note:
     //  1. There can be few unused imports, you will need to fix them to make the build pass.
     //  2. You can use "./gradlew build" to check if your code builds successfully.
-
+    
     private void validateQuestionList(List<Question> qList, Level contestLevel) throws InvalidContestException {
+        if (qList.isEmpty()) {
+            throw new InvalidContestException("Question list is empty."); // Handle empty list
+        }
+    
+        Level prev = qList.get(0).getLevel();
+        if (prev != contestLevel) {
+            throw new InvalidContestException("First question level doesn't match contest level.");
+        }
+    
+        for (int i = 1; i < qList.size(); i++) { // Start from the second question
+            Level currentLevel = qList.get(i).getLevel();
+            if (currentLevel != prev) {
+                throw new InvalidContestException("Question levels are not consistent.");
+            }
+            prev = currentLevel; // Update prev for the next iteration
+        }
     }
+    
 
 
     
