@@ -14,11 +14,20 @@ public class Contest extends BaseEntity{
     private final User creator;
     private ContestStatus contestStatus;
 
+    public Contest(Contest contest){
+        this(contest.id,contest.name,contest.questions,contest.level,contest.creator,contest.contestStatus);
+    }
+
+    public Contest(String id, String name, List<Question> questions, Level level, User creator,
+            ContestStatus contestStatus) {
+        this(name,questions,level,creator,contestStatus);
+        this.id = id;
+    }
 
     public Contest(String name, List<Question> questions, Level level, User creator,
             ContestStatus contestStatus) {
         this.name = name;
-        this.questions = new ArrayList<>();
+        this.questions = questions;
         validateQuestionList(questions, level);
         this.level = level;
         this.creator = creator;
@@ -51,7 +60,12 @@ public class Contest extends BaseEntity{
     }
     
 
+    // TODO: CRIO_TASK_MODULE_SERVICES
+    // Change the Contest Status to ENDED
 
+    public void endContest(){
+        contestStatus=ContestStatus.ENDED;
+    }
     
     public String getName() {
         return name;
