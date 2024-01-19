@@ -16,11 +16,8 @@ import com.crio.codingame.exceptions.InvalidOperationException;
 import com.crio.codingame.exceptions.UserNotFoundException;
 import com.crio.codingame.repositories.IContestRepository;
 import com.crio.codingame.repositories.IUserRepository;
-import com.crio.codingame.repositories.UserRepository;
 
 public class UserService implements IUserService {
-
-    private final int DEFAULT_USER_SCORE=0;
 
     private final IUserRepository userRepository;
     private final IContestRepository contestRepository;
@@ -51,8 +48,8 @@ public class UserService implements IUserService {
         if (scoreOrder == ScoreOrder.DESC) {
             comparator = comparator.reversed();
         }
-        return users.stream().sorted(comparator).collect(Collectors.toList());
-    }
+        return users.stream().sorted(comparator).collect(Collectors.toList());}
+ 
 
     @Override
     public UserRegistrationDto attendContest(String contestId, String userName) throws ContestNotFoundException, UserNotFoundException, InvalidOperationException {
